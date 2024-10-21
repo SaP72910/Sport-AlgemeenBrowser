@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-mailserviceofSportAlgemeen</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<form id="create-email-form">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Create Email</button>
+</form>
+
+<script>
+document.getElementById('create-email-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  fetch('https://api.example.com/create-email', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer 12345abcd',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: username,
+      domain: 'sportalgemeen.com',
+      password: password
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Email created: ' + username + '@sportalgemeen.com');
+    } else {
+      alert('Error: ' + data.error);
+    }
+  })
+  .catch(error => console.error('Error:', error));
+});
+</script>
+
+
